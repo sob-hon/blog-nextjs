@@ -1,13 +1,11 @@
+import PostsGrid from '../posts/PostsGrid';
 import classes from './FeaturedPosts.module.css'
 
-const FeaturedPosts = () => {
+const FeaturedPosts = (props) => {
   return (
-    <section>
-      <div>Image</div>
-      <h1>{`Hi I'm Sobhan :)`}</h1>
-      <p>
-        I blog about web development - especially frontend frameworks like React
-      </p>
+    <section className={classes.latest}>
+      <h2>Featured Posts</h2>
+      <PostsGrid posts={props.posts} />
     </section>
   );
 };
