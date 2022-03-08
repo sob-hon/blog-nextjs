@@ -1,26 +1,42 @@
 import classes from "./PostContent.module.css";
 import PostHeader from "./PostHeader";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-const DUMMY_POSTS = [
-  {
-    title: "Getting Started with NextJS",
-    image: "getting-started-nextjs.png",
-    date: "2022-02-10",
-    content: "# This a first post",
-    slug: "getting-started-with-nextjs",
-  },
-];
+const PostContent = ({ post }) => {
+  const imgPath = `/images/posts/${post.slug}/${post.image}`;
 
-console.log(DUMMY_POSTS[0].content);
+  const customRenderers = {
+    img(image) {
+      return (
+        <Image
+          src={`/images/posts/${post.slug}/${image.src}`}
+          alt={image.alt}
+          width={600}
+          height={300}
+        />
+      );
+    },
 
-const PostContent = () => {
-  const imgPath = `/images/posts/${DUMMY_POSTS[0].slug}/${DUMMY_POSTS[0].image}`;
+    code(code) {
+      const { className, children } = code;
+      const language = className.split("-")[1]; // className is something like language-js => We need the "js" part here
+      return (
+        <SyntaxHighlighter
+          style={materialDark}
+          language={language}
+          children={children}
+        />
+      );
+    },
+  };
 
   return (
     <article className={classes.content}>
-      <PostHeader image={imgPath} title={DUMMY_POSTS[0].title} />
-      <ReactMarkdown>{DUMMY_POSTS[0].content}</ReactMarkdown>
+      <PostHeader image={imgPath} title={post.title} />
+      <ReactMarkdown components={customRenderers}>{post.content}</ReactMarkdown>
     </article>
   );
 };
