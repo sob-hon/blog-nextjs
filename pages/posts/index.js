@@ -1,6 +1,6 @@
 import AllPosts from "../../components/posts/AllPosts";
 import { getAllPosts } from "./../../lib/posts-utils";
-import Head from "next/document";
+import Head from "next/head";
 
 const AllPostsPage = (props) => {
   return (

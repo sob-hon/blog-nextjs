@@ -1,6 +1,6 @@
 import PostContent from "../../components/posts/post-detail/PostContent";
 import { getPostData, getPostsFiles } from "../../lib/posts-utils";
-import Head from 'next/document';
+import Head from "next/head";
 
 const PostDetailPage = (props) => {
   return (
