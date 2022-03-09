@@ -1,4 +1,4 @@
-import classes from "./Notification.module.css";
+import classes from "/components/ui/Notification.module.css";
 
 function Notification(props) {
   const { title, message, status } = props;
